@@ -1,0 +1,33 @@
+---
+
+- name: install sublime text 3
+  homebrew_cask: name=sublime-text3 state=present
+
+- name: create directories
+  file:
+    path: "{{item}}"
+    state: directory
+    recurse: yes
+  with_items:
+    - /Users/{{ lookup('env','USER') }}/Library/Application Support/Sublime Text 3
+    - /Users/{{ lookup('env','USER') }}/Library/Application Support/Sublime Text 3/Packages
+    - /Users/{{ lookup('env','USER') }}/Library/Application Support/Sublime Text 3/Packages/User
+    - /Users/{{ lookup('env','USER') }}/Library/Application Support/Sublime Text 3/Installed Packages
+
+- name: download package control
+  become: yes
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: wheel
+    mode: 0644
+  with_items:
+    - {
+        url: 'http://sublime.wbond.net/Package%20Control.sublime-package',
+        dest: /Users/{{ lookup('env','USER') }}/Library/Application Support/Sublime Text 3/Installed Packages/Package Control.sublime-package
+      }
+
+- git: update=yes version={{item.version}} repo={{item.repo}} dest=/Users/{{ lookup('env','USER') }}/Library/Application Support/Sublime Text 3/Packages/{{item.dest}}
+  with_items: sublime_packages
+
