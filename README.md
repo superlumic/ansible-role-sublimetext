@@ -1,38 +1,71 @@
-Role Name
-=========
+# superlumic-sublimetext
 
-A brief description of the role goes here.
+Ansible role to install and configure Sublime Text 3 on OSX. This role is part of the Superlumic project that aims to simplify repeat computer setups on OSX, 10.10 and up.
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+* OSX 10.10 or 10.11
 
-Role Variables
---------------
+## Role variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Minimal set:
 
-Dependencies
-------------
+```yaml
+sublime_packages:
+  - dest: "Theme - Soda"
+    repo: "https://github.com/buymeasoda/soda-theme.git"
+    version: "master"
+  - dest: "Base16"
+    repo: "https://github.com/chriskempson/base16-textmate.git"
+    version: "master"
+sublime_text_color_scheme: "Packages/Base16/base16-eighties.dark.tmTheme"
+sublime_text_theme: "Soda Dark 3.sublime-theme"
+```
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+More extensive set:
 
-Example Playbook
-----------------
+```yaml
+    - sublime_packages:
+        - dest: "SideBarEnhancements"
+          repo: "https://github.com/titoBouzout/SideBarEnhancements"
+          version: "st3"
+        - dest: "GitGutter"
+          repo: "https://github.com/jisaacks/GitGutter.git"
+          version: "master"
+        - dest: "BracketHighlighter"
+          repo: "https://github.com/facelessuser/BracketHighlighter.git"
+          version: "master"
+        - dest: "Theme - Soda"
+          repo: "https://github.com/buymeasoda/soda-theme.git"
+          version: "master"
+        - dest: "Base16"
+          repo: "https://github.com/chriskempson/base16-textmate.git"
+          version: "master"
+        - dest: "ApplySyntax"
+          repo: "https://github.com/facelessuser/ApplySyntax.git"
+          version: "master"
+        - dest: "SublimeAllAutocomplete"
+          repo: "https://github.com/alienhard/SublimeAllAutocomplete"
+          version: "master"
+        - dest: "Ansible"
+          repo: "https://github.com/clifford-github/sublime-ansible.git"
+          version: "master"
+    - sublime_text_color_scheme: "Packages/Base16/base16-eighties.dark.tmTheme"
+    - sublime_text_theme: "Soda Dark 3.sublime-theme"
+```
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+## Dependencies
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+* [roderik.superlumic-homebrew](https://github.com/superlumic/ansible-role-homebrew)
 
-License
--------
+# Usage
 
-BSD
+Check [Superlumic](https://github.com/superlumic/superlumic) for documentation
 
-Author Information
-------------------
+# License
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+MIT
+
+# Author
+
+[Roderik van der Veer](mailto:roderik@superlumic.com) - [@r0derik](https://twitter.com/r0derik)
