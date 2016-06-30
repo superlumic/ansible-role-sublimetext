@@ -4,7 +4,7 @@
   homebrew_tap: tap=caskroom/versions state=present
 
 - name: install sublime text 3
-  homebrew_cask: name=sublime-text3 state=present
+  homebrew_cask: name=sublime-text state=present
 
 - name: create directories
   file:
