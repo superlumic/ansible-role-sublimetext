@@ -23,7 +23,7 @@
     dest: "~/Library/Application Support/Sublime Text 3/Installed Packages/Package Control.sublime-package"
 
 - name: get and update all sublime plugins
-  git: update=yes version="{{item.version}}" repo="{{item.repo}}" dest="~/Library/Application Support/Sublime Text 3/Packages/{{item.dest}}"
+  git: update=yes version="{{item.version|default('master')}}" repo="{{item.repo}}" dest="~/Library/Application Support/Sublime Text 3/Packages/{{item.dest}}"
   with_items: "{{ sublime_packages }}"
 
 - name: render the sublime config file
